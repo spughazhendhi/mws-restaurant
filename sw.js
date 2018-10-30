@@ -1,5 +1,6 @@
 let staticCacheName = 'restaurant-static-v1';
 
+/* add items to cache */
 self.addEventListener('install',function(event){
   var urlsToCache = [
     '/',
@@ -30,6 +31,7 @@ self.addEventListener('install',function(event){
   );
 });
 
+/* delete unused cache */
 self.addEventListener('activate',function(event){
   event.waitUntil(
     caches.keys().then(function(cacheNames){
@@ -44,6 +46,7 @@ self.addEventListener('activate',function(event){
   );
 });
 
+/* if data present in cache get it from there,otherwise fetch record from server */
 self.addEventListener('fetch',function(event){
   event.respondWith(
     caches.match(event.request).then(function(response){
